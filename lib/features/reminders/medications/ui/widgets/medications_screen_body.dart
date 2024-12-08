@@ -9,12 +9,12 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/reminders/medications/data/models/get_all_babies_medication_schedule/get_all_babies_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/babies_list_view.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_babies_medicines_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medicines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
-import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -76,31 +76,6 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
                   : 'My Medications',
           style: TextStyles.font20BlackSemiBold,
         ),
-        actions: [
-          Builder(
-            builder: (context) {
-              return IconButton(
-                icon: Icon(Icons.menu, size: 24.sp, color: Colors.black),
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-              );
-            },
-          ),
-        ],
-      ),
-      endDrawer: MedicinesSidebarX(
-        controller: _controller,
-        onItemSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        selectedBabyName: (String name) {
-          setState(() {
-            selectedBabyName = name;
-          });
-        },
       ),
       floatingActionButton: _selectedIndex == 1
           ? null
@@ -138,7 +113,8 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 32.h),
-            WeekDaysWidget(weekDays: weekDays, currentDate: _currentDate),
+            BabiesListView(),
+            // WeekDaysWidget(weekDays: weekDays, currentDate: _currentDate),
             SizedBox(height: 32.h),
             Text(
               'Today',

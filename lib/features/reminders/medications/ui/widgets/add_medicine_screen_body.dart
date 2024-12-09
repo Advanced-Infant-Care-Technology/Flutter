@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
@@ -27,7 +26,31 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
   final TextEditingController _timeController = TextEditingController();
   final TextEditingController _startDayController = TextEditingController();
   final TextEditingController _finishDayController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();  // Global key for the form validation
+  final _formKey = GlobalKey<FormState>(); // Global key for the form validation
+  late String medicationName; // To store updated medication name
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with the initial text in the controller
+    medicationName = context
+        .read<AddMedicationScheduleCubit>()
+        .medicationNameController
+        .text;
+
+    // Listen for changes in the medicationNameController
+    context
+        .read<AddMedicationScheduleCubit>()
+        .medicationNameController
+        .addListener(() {
+      setState(() {
+        medicationName = context
+            .read<AddMedicationScheduleCubit>()
+            .medicationNameController
+            .text;
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -44,7 +67,7 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Form(
-          key: _formKey,  
+          key: _formKey,
           child: Column(
             children: [
               Expanded(
@@ -95,7 +118,9 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
                   textStyle: TextStyles.font16WhiteBold,
                 ),
               ),
-              const AddMedicineBlocListner(),
+              AddMedicineBlocListner(
+              
+              ),
             ],
           ),
         ),

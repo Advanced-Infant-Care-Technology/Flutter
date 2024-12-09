@@ -1,3 +1,4 @@
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/networking/api_error_model.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddMedicineBlocListner extends StatelessWidget {
-  const AddMedicineBlocListner({super.key});
+  const AddMedicineBlocListner({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/app_router.dart';
+import '../../../../core/theme/colors_manager.dart';
 
 class MamaTipsCard extends StatelessWidget {
   const MamaTipsCard({
@@ -18,12 +19,12 @@ class MamaTipsCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: const Color(0xffFFBB5D),
+        color: ColorsManager.homeCardsColor,
         borderRadius: BorderRadius.circular(32.r),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xffFFBB5D).withOpacity(0.5),
-            offset: const Offset(0, 5),
+            color: Color(0xff8E8E8E),
+            offset: Offset(0, 5),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -44,7 +45,7 @@ class MamaTipsCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeightHelper.semiBold,
-                    color: Colors.white,
+                    color: ColorsManager.homeCardsTextColor,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -56,7 +57,7 @@ class MamaTipsCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeightHelper.medium,
-                        color: Colors.white,
+                        color: ColorsManager.homeCardsTextColor,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.visible,
@@ -68,7 +69,7 @@ class MamaTipsCard extends StatelessWidget {
           ),
           SizedBox(width: 8.w),
           ForwardArrowButton(
-            iconColor: const Color(0xffFFBB5D),
+            iconColor: ColorsManager.primaryPinkColor,
             onPressed: () {
               GoRouter.of(context).push(AppRouter.kTargetSelectionScreen);
             },

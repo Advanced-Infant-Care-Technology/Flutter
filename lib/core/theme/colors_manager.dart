@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class ColorsManager {
-  static const Color primaryPinkColor = Color(0xffE388C4);
+  static const Color primaryPinkColor = Color(0xffEC7FA9);
   static const Color primaryPinkColor2 = Color(0xffE68CC7);
   static const Color primaryBlueColor = Color(0xff0A6AA6);
   static const Color secondryPinkColor = Color(0xffD9849B);
@@ -12,4 +12,6 @@ class ColorsManager {
   static const Color fourthryBlueColor = Color(0xffC4DBE4);
   static const Color darkBlue = Color(0xff242424);
   static const Color white = Color(0xffFFFFFF);
+  static const Color homeCardsColor = Color(0xff0A6AA6);
+  static const Color homeCardsTextColor = Color(0xffffffff);
 }

@@ -5,6 +5,8 @@ import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/theme/colors_manager.dart';
+
 class CommuntiyCard extends StatelessWidget {
   const CommuntiyCard({
     super.key,
@@ -15,12 +17,12 @@ class CommuntiyCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: const Color(0xff8794C3),
+        color: ColorsManager.homeCardsColor,
         borderRadius: BorderRadius.circular(32.r),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xff8794C3).withOpacity(0.5),
-            offset: const Offset(0, 5),
+            color: Color(0xff8E8E8E),
+            offset: Offset(0, 5),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -40,7 +42,7 @@ class CommuntiyCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeightHelper.semiBold,
-                    color: Colors.white,
+                    color: ColorsManager.homeCardsTextColor,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -52,7 +54,7 @@ class CommuntiyCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeightHelper.medium,
-                        color: Colors.white,
+                        color: ColorsManager.homeCardsTextColor,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.visible,
@@ -63,8 +65,11 @@ class CommuntiyCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-           ForwardArrowButton(
-            iconColor: const Color(0xff8794C3), onPressed: () {  },
+          ForwardArrowButton(
+            iconColor: ColorsManager.primaryPinkColor,
+            onPressed: () {
+              
+            },
           ),
         ],
       ),

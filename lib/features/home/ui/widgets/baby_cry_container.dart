@@ -15,79 +15,86 @@ class BabyCryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          height: 168.h,
-          decoration: BoxDecoration(
-            color: const Color(0xffEEEEEE),
-            borderRadius: BorderRadius.circular(40.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                offset: const Offset(0, 5),
-                blurRadius: 10,
-                spreadRadius: 1,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          'Crying? Let’s find \n out why',
-                          style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeightHelper.semiBold),
-                        ),
-                      ),
-                      SizedBox(height: 24.h),
-                      InkWell(
-                        onTap: () {
-                          GoRouter.of(context).push(AppRouter.kRecoderScreen);
-                        },
-                        child: Container(
-                          width: 120.w,
-                          height: 32.h,
-                          decoration: BoxDecoration(
-                              color: ColorsManager.primaryPinkColor,
-                              borderRadius: BorderRadius.circular(16.r)),
-                          child: Center(
-                            child: Text(
-                              'Find out',
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightHelper.semiBold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kRecoderScreen);
+      },
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: 168.h,
+            decoration: BoxDecoration(
+              color: ColorsManager.homeCardsColor,
+              borderRadius: BorderRadius.circular(40.r),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0xff8E8E8E),
+                  offset: Offset(0, 5),
+                  blurRadius: 10,
+                  spreadRadius: 1,
                 ),
               ],
             ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Crying? Let’s find \n out why',
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeightHelper.semiBold,
+                              color: ColorsManager.homeCardsTextColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
+                        InkWell(
+                          onTap: () {
+                            GoRouter.of(context).push(AppRouter.kRecoderScreen);
+                          },
+                          child: Container(
+                            width: 120.w,
+                            height: 32.h,
+                            decoration: BoxDecoration(
+                                color: ColorsManager.primaryPinkColor,
+                                borderRadius: BorderRadius.circular(16.r)),
+                            child: Center(
+                              child: Text(
+                                'Find out',
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeightHelper.semiBold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        Positioned(
-          top: -MediaQuery.of(context).size.height * 0.02,
-          left: MediaQuery.of(context).size.width * 0.5,
-          child: Image.asset(
-            AppImages.cryBabyImage,
+          Positioned(
+            top: -MediaQuery.of(context).size.height * 0.02,
+            left: MediaQuery.of(context).size.width * 0.5,
+            child: Image.asset(
+              AppImages.cryBabyImage,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -17,80 +17,85 @@ class RemindersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: EdgeInsets.all(16.r),
-          decoration: BoxDecoration(
-            color: ColorsManager.secondryPinkColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(32.r),
-              bottomRight: Radius.circular(32.r),
-              topRight: Radius.circular(32.r),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: ColorsManager.secondryPinkColor.withOpacity(0.5),
-                offset: const Offset(0, 5),
-                blurRadius: 10,
-                spreadRadius: 1,
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kRemindersScreen);
+      },
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.r),
+            decoration: BoxDecoration(
+              color: ColorsManager.homeCardsColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(32.r),
+                bottomRight: Radius.circular(32.r),
+                topRight: Radius.circular(32.r),
               ),
-            ],
-          ),
-          height: MediaQuery.of(context).size.height * 0.14,
-          width: MediaQuery.of(context).size.width * 0.5 - 24,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Reminders',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeightHelper.semiBold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 12.h),
-                    Flexible(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          'Medicine &\nVaccine Reminders',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeightHelper.medium,
-                            color: Colors.white,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.visible,
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0xff8E8E8E),
+                  offset: Offset(0, 5),
+                  blurRadius: 10,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+            height: MediaQuery.of(context).size.height * 0.14,
+            width: MediaQuery.of(context).size.width * 0.5 - 24,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Reminders',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeightHelper.semiBold,
+                          color: ColorsManager.homeCardsTextColor,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 12.h),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Medicine &\nVaccine Reminders',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeightHelper.medium,
+                              color: ColorsManager.homeCardsTextColor,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(width: 8.w),
-              ForwardArrowButton(
-                iconColor: ColorsManager.secondryPinkColor,
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kRemindersScreen);
-                },
-              ),
-            ],
+                SizedBox(width: 8.w),
+                ForwardArrowButton(
+                  iconColor: const Color(0xFFE376B9),
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kRemindersScreen);
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          top: -MediaQuery.of(context).size.height * 0.085,
-          left: MediaQuery.of(context).size.width * 0.22,
-          child: Image.asset(AppImages.alarmImage),
-        ),
-      ],
+          Positioned(
+            top: -MediaQuery.of(context).size.height * 0.085,
+            left: MediaQuery.of(context).size.width * 0.22,
+            child: Image.asset(AppImages.alarmImage),
+          ),
+        ],
+      ),
     );
   }
 }

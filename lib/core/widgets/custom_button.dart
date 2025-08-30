@@ -1,55 +1,73 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
-  final Color? backgroundColor;
+  final List<Color>? gradientColors;
   final double? horizontalPadding;
   final double? verticalPadding;
+  final double buttonHeight;
   final double? buttonWidth;
-  final double? buttonHeight;
   final String buttonText;
   final TextStyle textStyle;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final Color? buttonColor;
+  final double? borderWidth;
+  final Color? borderColor;
+  final Color? textColor;
+
   const AppTextButton({
     super.key,
     this.borderRadius,
-    this.backgroundColor,
+    this.gradientColors,
     this.horizontalPadding,
     this.verticalPadding,
-    this.buttonHeight,
+    this.buttonHeight = 48,
     this.buttonWidth,
     required this.buttonText,
     required this.textStyle,
-    required this.onPressed,
+    this.onPressed,
+    this.buttonColor,
+    this.borderWidth,
+    this.borderColor,
+    this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
+    return SizedBox(
+      width: buttonWidth ?? double.infinity,
+      height: buttonHeight,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
+        onTap: onPressed,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: gradientColors != null
+                ? LinearGradient(
+                    colors: gradientColors!,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
+                : null,
+            color: buttonColor ??
+                (gradientColors == null
+                    ? ColorsManager.primaryPinkColor
+                    : null),
             borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
+            border: borderWidth != null
+                ? Border.all(
+                    width: borderWidth!,
+                    color: borderColor ?? Colors.black,
+                  )
+                : null,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            buttonText,
+            style: textStyle.copyWith(color: textColor ?? Colors.white),
           ),
         ),
-        // backgroundColor: WidgetStatePropertyAll(
-        //   backgroundColor ?? ColorsManager.mainBlue,
-        // ),
-        padding: WidgetStatePropertyAll<EdgeInsets>(
-          EdgeInsets.symmetric(
-            horizontal: horizontalPadding?.w ?? 12.w,
-            vertical: verticalPadding?.h ?? 14.h,
-          ),
-        ),
-        fixedSize: WidgetStatePropertyAll(
-          Size(buttonWidth?.w ?? double.maxFinite, buttonHeight ?? 50.h),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        buttonText,
-        style: textStyle,
       ),
     );
   }

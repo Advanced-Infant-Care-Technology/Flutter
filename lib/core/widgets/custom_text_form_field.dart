@@ -1,6 +1,6 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
@@ -11,51 +11,113 @@ class AppTextFormField extends StatelessWidget {
     this.inputTextStyle,
     this.hintStyle,
     required this.hintText,
-    this.obscureText,
+    this.isObscureText,
     this.suffixIcon,
-    this.backgoundColor,
+    this.prefixIcon,
+    this.backgroundColor,
+    this.width,
+    this.validator,
+    this.controller,
+    this.hasError = false,
+    this.maxLength,
+    this.keyboardType,
+    this.textAlign,
+    this.focusNode,
+    this.onChanged,
+    this.onTap,
+    this.readOnly = false,
+    this.enabled,
   });
+
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? hintStyle;
   final String hintText;
-  final bool? obscureText;
+  final bool? isObscureText;
   final Widget? suffixIcon;
-  final Color? backgoundColor;
+  final Widget? prefixIcon;
+  final Color? backgroundColor;
+  final double? width;
+  final Function(String?)? validator;
+  final TextEditingController? controller;
+  final bool hasError;
+  final int? maxLength;
+  final TextInputType? keyboardType;
+  final TextAlign? textAlign;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
+  final VoidCallback? onTap;
+  final bool readOnly;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: InputDecoration(
-        isDense: true,
-        contentPadding: contentPadding ??
-            EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
-        focusedBorder: focusedBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: BorderSide(
-             //   color: ColorsManager.mainBlue,
-                width: 1.3.w,
+    Color textColor = ColorsManager.secondryBlueColor;
+    Color hintColor = Colors.grey;
+
+    return SizedBox(
+      width: width ?? double.infinity,
+      child: TextFormField(
+        enabled: enabled,
+        controller: controller,
+        style: inputTextStyle ?? TextStyle(color: textColor),
+        maxLength: maxLength,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: contentPadding ??
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+          constraints: const BoxConstraints(minHeight: 48),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: BorderSide(
+                color: hasError ? Colors.red : ColorsManager.secondryBlueColor,
+                width: 2.w),
+          ),
+          focusedBorder: focusedBorder ??
+              OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.r),
+                borderSide: BorderSide(
+                    color:
+                        hasError ? Colors.red : ColorsManager.secondryBlueColor,
+                    width: 2.w),
               ),
-            ),
-        enabledBorder: enabledBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: BorderSide(
-              //  color: ColorsManager.lighterGray,
-                width: 1.3.w,
+          enabledBorder: enabledBorder ??
+              OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.r),
+                borderSide: BorderSide(
+                    color:
+                        hasError ? Colors.red : ColorsManager.secondryBlueColor,
+                    width: 2.w),
               ),
-            ),
-      //  hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
-        hintText: hintText,
-        suffixIcon: suffixIcon,
-       // fillColor: backgoundColor ?? ColorsManager.moreLightGray,
-        filled: true,
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2.w),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2.w),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+          ),
+          hintText: hintText,
+          hintStyle: hintStyle ?? TextStyle(color: hintColor),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+          filled: true,
+          fillColor: Colors.transparent,
+          errorMaxLines: 2,
+          counterText: '',
+        ),
+        obscureText: isObscureText ?? false,
+        validator: (value) {
+          return validator != null ? validator!(value) : null;
+        },
+        focusNode: focusNode,
+        onChanged: onChanged,
+        onTap: onTap,
+        readOnly: readOnly,
       ),
-      obscureText: obscureText ?? false,
-      //style: inputTextStyle ?? TextStyles.font14DarkBlueMedium,
     );
   }
 }
